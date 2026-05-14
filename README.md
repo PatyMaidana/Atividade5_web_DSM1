@@ -120,6 +120,48 @@ GET /api/3234
 
 Retorna os dados do concurso informado. Caso o parametro nao seja um numero inteiro, a API retorna erro `400`.
 
+## Comando SQL para criar tabelas
+CREATE TABLE IF NOT EXISTS public.megasena ( 
+  concurso INTEGER NOT NULL, 
+  data_do_sorteio DATE NOT NULL, 
+  bola1 INTEGER NOT NULL, 
+  bola2 INTEGER NOT NULL, 
+  bola3 INTEGER NOT NULL, 
+  bola4 INTEGER NOT NULL, 
+  bola5 INTEGER NOT NULL, 
+  bola6 INTEGER NOT NULL, 
+  ganhadores_6_acertos INTEGER NOT NULL, 
+  cidade_uf VARCHAR(510) NULL, 
+  rateio_6_acertos DECIMAL NOT NULL, 
+  ganhadores_5_acertos INTEGER NOT NULL, 
+  rateio_5_acertos DECIMAL NOT NULL, 
+  ganhadores_4_acertos INTEGER NOT NULL, 
+  rateio_4_acertos DECIMAL NOT NULL, 
+  acumulado_6_acertos DECIMAL NOT NULL, 
+  arrecadacao_total DECIMAL NOT NULL, 
+  estimativa_premio DECIMAL NOT NULL, 
+  acumulado_sorteio_especial_mega_da_virada DECIMAL NOT NULL, 
+  observacao VARCHAR(255) NULL, 
+  PRIMARY KEY(concurso) 
+);
+
+TRUNCATE TABLE megasena; 
+ 
+COPY megasena 
+FROM '__SEED_DATA_DIR__/megasena.csv' 
+WITH ( 
+  FORMAT csv, 
+  HEADER true, 
+  DELIMITER ';', 
+  NULL 'NULL',
+   ENCODING 'UTF8' 
+); 
+
+
+  
+
+
+
 ## Scripts disponiveis
 
 - `npm start`: inicia o servidor.
